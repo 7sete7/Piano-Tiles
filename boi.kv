@@ -1,0 +1,70 @@
+#:kivy 1.0
+#:import random random
+
+<Gerenciador>:
+    Menu:
+        name: 'menu'
+        BoxLayout:
+            padding: (root.width * 0.25, root.height * 0.2)
+            BoxLayout:
+                orientation: 'vertical'
+                spacing: 20
+                padding: (self.width * 0.1, self.height * 0.25)
+                canvas.before:
+                    Color:
+                        rgb: 0.1, 0.3, 0.5, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                Button:
+                    text: 'Iniciar'
+                    on_release: app.root.current = 'game'
+                Button:
+                    text:'Sair'
+                    on_release: app.stop()
+    Game:
+        name: 'game'
+
+<Game>:
+    FloatLayout:
+        BoxLayout:
+            id: jogo
+            canvas.before:
+                Color:
+                    rgb: 1,1,1
+                Rectangle:
+                    size: root.size
+                    pos: root.pos
+            Lane:
+            Lane:
+            Lane:
+            Lane:
+        Label:
+            color: 0, 0, 0, 1
+            font_size: 30
+            pos: (0, root.height / 2 - 20)
+            text: str(root.score)
+
+<Lane>:
+    padding: 10
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 0
+        Rectangle:
+            size: self.size
+            pos: self.pos
+        Color:
+            rgba: 0, 0, 0, 0.6
+        Line:
+            width: 1
+            rectangle: (self.x + self.width) - 1, self.y, 1, self.height
+
+<Tile>:
+    size_hint: (None, None)
+    canvas.before:
+        Color:
+            # rgba: random.random(), random.random(), random.random(), 0.6
+            rgba: self.cor
+        Rectangle:
+            size: self.size
+            pos: self.pos
